@@ -1,0 +1,28 @@
+{
+  "name": "color-path",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Color-path аркадная игра для браузера",
+  "author": "Vladislav Voloshanovskii <vladislav.voloshanovskii@gmail.com> (https://github.com/Obezyankaa)",
+  "keywords": [
+    "pixijs",
+    "typescript",
+    "vite"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "~6.0.2",
+    "vite": "^8.1.0"
+  },
+  "dependencies": {
+    "gsap": "^3.15.0",
+    "howler": "^2.2.4",
+    "pixi.js": "^8.19.0",
+    "zustand": "^5.0.14"
+  }
+}
