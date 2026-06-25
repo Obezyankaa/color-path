@@ -21,7 +21,15 @@ export class AssetLoader {
       { alias: "light_orange_ball", src: "src/assets/ball_light_orange.png" },
       { alias: "green_ball", src: "src/assets/ball_green.png" },
 
-      { alias: "blue_platform", src: "src/assets/platform_blue.png" },
+      { alias: "platform_blue", src: "src/assets/platform_blue.png" },
+      { alias: "platform_red", src: "src/assets/platform_red.png" },
+      { alias: "platform_yellow", src: "src/assets/platform_yellow.png" },
+      { alias: "platform_orange", src: "src/assets/platform_orange.png" },
+      {
+        alias: "platform_light_orange",
+        src: "src/assets/platform_light_orange.png",
+      },
+      { alias: "platform_green", src: "src/assets/platform_green.png" },
       { alias: "platform_purple", src: "src/assets/platform_purple.png" },
     ];
     return Assets.load(assets);

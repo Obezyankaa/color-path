@@ -1,4 +1,4 @@
-import { Assets, Container, Sprite, Texture } from "pixi.js";
+import { Assets, Container, Sprite } from "pixi.js";
 
 export class Ball extends Container {
   private sprite: Sprite;

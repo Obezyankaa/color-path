@@ -10,7 +10,7 @@ export class Platform extends Container {
     super();
 
     // Тень — нижний слой, добавляем первой
-    const shadowTexture = Assets.get("platform_shadow");
+    const shadowTexture = Assets.get("shadow_platform");
     this.shadow = new Sprite(shadowTexture);
     this.shadow.anchor.set(0.6, 0.3);
     this.shadow.scale.set(this.baseScale);
@@ -27,6 +27,10 @@ export class Platform extends Container {
     return this.y - this.sprite.height / 2;
   }
 
+  setTexture(texture: Texture) {
+    this.sprite.texture = texture;
+  }
+
   bounce() {
     gsap.killTweensOf(this.sprite.scale);
     gsap.killTweensOf(this.shadow.scale);
@@ -34,28 +38,34 @@ export class Platform extends Container {
     const tl = gsap.timeline();
 
     tl.to(this.sprite.scale, {
-        x: this.baseScale * 1.25,
-        y: this.baseScale * 0.6,
-        duration: 0.08,
-        ease: "power2.out",
-      })
-      .to(this.sprite.scale, {
-        x: this.baseScale,
-        y: this.baseScale,
-        duration: 0.4,
-        ease: "elastic.out(1, 0.35)",
-      });
+      x: this.baseScale * 1.25,
+      y: this.baseScale * 0.6,
+      duration: 0.08,
+      ease: "power2.out",
+    }).to(this.sprite.scale, {
+      x: this.baseScale,
+      y: this.baseScale,
+      duration: 0.4,
+      ease: "elastic.out(1, 0.35)",
+    });
 
     // Shadow follows sprite x scale
-    tl.to(this.shadow.scale, {
+    tl.to(
+      this.shadow.scale,
+      {
         x: this.baseScale * 1.25,
         duration: 0.08,
         ease: "power2.out",
-      }, 0)
-      .to(this.shadow.scale, {
+      },
+      0,
+    ).to(
+      this.shadow.scale,
+      {
         x: this.baseScale,
         duration: 0.4,
         ease: "elastic.out(1, 0.35)",
-      }, 0.08);
+      },
+      0.08,
+    );
   }
 }

@@ -2,6 +2,7 @@ import { Application, Assets, TextureSource } from "pixi.js";
 import { Platform } from "../entities/Platform";
 import { Ball } from "../entities/Ball";
 import { AssetLoader } from "./assetLoader";
+import { PlatformField } from "../world/PlatformField";
 
 TextureSource.defaultOptions.scaleMode = "linear";
 
@@ -11,7 +12,7 @@ export async function createApp() {
   async function setup() {
     await app.init({
       resizeTo: window,
-      background: "#ffffff",
+      background: "#000000",
       antialias: true,
       resolution: window.devicePixelRatio || 1,
       autoDensity: true,
@@ -23,25 +24,17 @@ export async function createApp() {
   await setup();
   await new AssetLoader().preload();
 
-  const texture = Assets.get("blue_platform");
-  const platform = new Platform(texture);
-  platform.x = app.screen.width / 2;
-  platform.y = app.screen.height / 2;
-  app.stage.addChild(platform);
+  const ballSlot = {
+    x: app.screen.width / 2,
+    y: app.screen.height * 0.6,
+  };
 
- const ball = new Ball("blue_ball".replace("_ball", ""));
- ball.x = platform.x;
- app.stage.addChild(ball);
- ball.land(platform.topY);
+  const field = new PlatformField(app.stage, ballSlot);
 
-  app.ticker.add((ticker) => {
-    ball.update(ticker.deltaTime);
-    ball.updateShadow(platform.topY);
-
-    // Ball lands on platform
-    if (!ball.isOnGround && ball.isFalling && ball.bottomY >= platform.topY) {
-      ball.land(platform.topY);
-      platform.bounce();
+  window.addEventListener("keydown", (e) => {
+    if (e.code === "Space") {
+      e.preventDefault();
+      field.advance();
     }
   });
 })();
