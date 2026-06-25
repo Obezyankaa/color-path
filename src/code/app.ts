@@ -29,17 +29,10 @@ export async function createApp() {
   platform.y = app.screen.height / 2;
   app.stage.addChild(platform);
 
-  const ball = new Ball(Assets.get("blue_ball"));
-  ball.x = platform.x;
-  app.stage.addChild(ball);
-  ball.land(platform.topY);
-
-  window.addEventListener("keydown", (e) => {
-    if (e.code === "Space") {
-      e.preventDefault();
-      if (ball.isOnGround) ball.jump();
-    }
-  });
+ const ball = new Ball("blue_ball".replace("_ball", ""));
+ ball.x = platform.x;
+ app.stage.addChild(ball);
+ ball.land(platform.topY);
 
   app.ticker.add((ticker) => {
     ball.update(ticker.deltaTime);
